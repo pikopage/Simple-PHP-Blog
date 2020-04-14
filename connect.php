@@ -5,10 +5,9 @@ $dbpass 	= "";
 $dbname 	= "newblog";
 $charset 	= "utf8"
 
-$dbcon = mysqli_connect($dbhost, $dbuser, $dbpass);
-
-if (!$dbcon) {
-    die("Connection failed" . mysqli_connect_error());
+$dbcon = new mysqli($dbhost, $dbuser, $dbpass,$dbname);
+if(mysqli_connect_errno())
+{
+	print_f("Connection Failed: %s\n",mysqli_connect_error());
 }
-mysqli_select_db($dbcon,$dbname);
 mysqli_set_charset($dbcon,$charset);
