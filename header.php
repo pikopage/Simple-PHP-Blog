@@ -1,4 +1,7 @@
 <?php
+if (realpath(__FILE__) == realpath($_SERVER['DOCUMENT_ROOT'].$_SERVER['SCRIPT_NAME'])) {
+echo "File can't be called separately, it is part of other script";
+}else{
 $sql = "SELECT value FROM setting where variable = 'title'";
 $result = mysqli_query($dbcon, $sql);
 $title = $result->fetch_row();
@@ -55,4 +58,5 @@ function showpost(str) {
 </div>
 <!-- Head End -->
 ";
+}
 ?>
