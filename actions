@@ -1,5 +1,11 @@
+<?php
 if (realpath(__FILE__) == realpath($_SERVER['DOCUMENT_ROOT'].$_SERVER['SCRIPT_NAME'])) {
 echo "File can't be called separately, it is part of other script";
 }else{
-//there will be nice code
+    if (isset($_GET['id']) && isset($_GET['action']) && $_GET['action']=="1" && $_SESSION['username']) {
+        $id = mysqli_real_escape_string($dbcon, (int)$_GET['id']);
+        $sql = "Update posts SET deleted = 1 WHERE id = '$id'";
+        $result = mysqli_query($dbcon, $sql);
+    }    
 }
+?>
