@@ -1,8 +1,8 @@
 <?php
 session_start();
 /*Check presense of all used subfiles*/
-//require("actions.php");
 require("connect.php");
+require("actions.php");
 require("header.php");
 require("menu.php");
 require("footer.php");
