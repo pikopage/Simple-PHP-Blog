@@ -1,6 +1,9 @@
     <?php
     /* Menu also manage user logon It is only included in index.php, does not work separetly */
-    if ($_GET['login']=="no") {
+if (realpath(__FILE__) == realpath($_SERVER['DOCUMENT_ROOT'].$_SERVER['SCRIPT_NAME'])) {
+echo "File can't be called separately, it is part of other script";
+}else{    
+if ($_GET['login']=="no") {
         session_destroy();
      $menu .=  "<div class='w3-card w3-round ".$card_color." w3-margin-right w3-margin-bottom' style='max-width:570px'><div class='w3-bar-item'>User logged out.</div></div>";
     }
@@ -38,5 +41,5 @@
     if ($_SESSION['username'] && $_GET['login']!=="no") {
         $menu .=  "<a href='index.php?login=no' class='w3-bar-item w3-round w3-btn w3-margin-right w3-margin-bottom ".$bck_color[0]."'><i class='fa fa-sign-out w3-margin-right'></i>Sign out</a>";
     }
-    
+}
     ?>
