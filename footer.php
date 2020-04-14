@@ -1,4 +1,7 @@
 <?PHP
+if (realpath(__FILE__) == realpath($_SERVER['DOCUMENT_ROOT'].$_SERVER['SCRIPT_NAME'])) {
+echo "File can't be called separately, it is part of other script";
+}else{
 $footer = "<div class='w3-container w3-round $card_color[0]'>
     <p class='w3-bar-item  w3-padding-large'>[PiKo] Page | ".date("Y")."<a href='index.php?login=yes'><i class='fa fa-lock w3-right'></i></a></p>
 </div>
@@ -9,4 +12,5 @@ $footer = "<div class='w3-container w3-round $card_color[0]'>
 </script>
 </div>
 </body>";
+}
 ?>
