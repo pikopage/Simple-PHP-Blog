@@ -34,7 +34,7 @@ if ($page < 1) {
 }
 $offset = ($page - 1) * $rowsperpage;
 /* Posts count ---- END */
-/* Preview - Create visible posts previw - START */
+/* Preview - Create visible posts preview - START */
 $sql = "SELECT id, title, description, DATE_FORMAT(date,'%D %M %Y') as date, char_length(description)-char_length(REPLACE(description, ' ', '')) as words FROM posts where deleted = 0 and visible = 1 AND pinned = 0 ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = $dbcon->query($sql);
 $numrows = $result->num_rows;
@@ -47,7 +47,9 @@ while ($row = $result->fetch_assoc()) {
     $des = $row['description'];
     $time = htmlentities($row['date']);
     $words = htmlentities($row['words']);
-$posts .= "<div id='post_$id'><div class='w3-card w3-round w3-padding-small w3-margin-bottom'>
+$posts .= "<div id='post_$id'>";
+
+$posts .= "<div class='w3-card w3-round w3-padding-small w3-margin-bottom'>
 <h3><a href='#' onclick='return showpost($id)' style='w3-bar-item w3-round w3-button w3-padding-large w3-theme-d4'>$title</a></h3><p>
 ".substr($des, 0, 100)."<a href='#' onclick='return showpost($id)'>... Read next $words words</a></p> <div class='w3-text-grey'>$time</div></div></div>";
 }
@@ -59,7 +61,7 @@ echo $mainpost;
 echo $posts;
 
 /* Presenter - Show HTML Code - END */
-/* This code still waitiong for changes */
+/* This code still waiting for changes */
 
 echo "<div class='w3-bar w3-center'>";
 if ($page > 1) {
