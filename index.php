@@ -50,8 +50,8 @@ while ($row = $result->fetch_assoc()) {
 $posts .= "<div id='post_$id'>";
 
 $posts .= "<div class='w3-card w3-round w3-padding-small w3-margin-bottom'>
-<h3><a href='#' onclick='return showpost($id)' style='w3-bar-item w3-round w3-button w3-padding-large w3-theme-d4'>$title</a></h3><p>
-".substr($des, 0, 100)."<a href='#' onclick='return showpost($id)'>... Read next $words words</a></p> <div class='w3-text-grey'>$time</div></div></div>";
+<h3><a href='#post_$id' onclick='return showpost($id)' style='w3-bar-item w3-round w3-button w3-padding-large w3-theme-d4'>$title</a></h3><p>
+".substr($des, 0, 100)."<a href='#post_$id' onclick='return showpost($id)'>... Read next $words words</a></p> <div class='w3-text-grey'>$time</div></div></div>";
 }
 /* Preview - END */
 /* Presenter - Show HTML Code - START */
