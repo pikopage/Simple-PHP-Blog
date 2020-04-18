@@ -18,7 +18,12 @@ $maindes[0]
 ";
 /* First post - Pinned only and only first one is fetched from DB. --END */
 /* Posts count - counting moved to DB ---- START */
-$sql = "SELECT a.value as value, ceil(count(*)/a.value) as totalpages FROM setting as a join posts as b where a.variable = 'rowsperpage' and b.deleted = 0 and b.visible = 1 and b.pinned = 0";
+if (isset($_SESSION['username'])){
+    $visible = "";
+}else{
+    $visible = "and b.visible = 1";
+}
+$sql = "SELECT a.value as value, ceil(count(*)/a.value) as totalpages FROM setting as a join posts as b where a.variable = 'rowsperpage' and b.deleted = 0 $visible and b.pinned = 0";
 $result = $dbcon->query($sql);
 $row = $result->fetch_assoc();
 $totalpages = $row['totalpages'];
@@ -35,7 +40,7 @@ if ($page < 1) {
 $offset = ($page - 1) * $rowsperpage;
 /* Posts count ---- END */
 /* Preview - Create visible posts preview - START */
-$sql = "SELECT id, title, description, DATE_FORMAT(date,'%D %M %Y') as date, char_length(description)-char_length(REPLACE(description, ' ', '')) as words FROM posts where deleted = 0 and visible = 1 AND pinned = 0 ORDER BY id DESC LIMIT $offset, $rowsperpage";
+$sql = "SELECT id, title, description, DATE_FORMAT(date,'%D %M %Y') as date, char_length(description)-char_length(REPLACE(description, ' ', '')) as words FROM posts b where deleted = 0 $visible AND pinned = 0 ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = $dbcon->query($sql);
 $numrows = $result->num_rows;
 if ($numrows < 1) {
