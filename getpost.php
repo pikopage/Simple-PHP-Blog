@@ -23,6 +23,11 @@ $by = $row['posted_by'];
 $hits = $row['hits'];
 $time = $row['date'];
 $visible = $row['visible'];
+if ($visible == 0){
+    $vis_color = "w3-pale-blue";
+}else{
+    $vis_color = "w3-sand";        
+}
 /*If it is requested, prepare edit window*/
 if ($edit == 1 and isset($_SESSION['username'])){
     $posts .= "<form action='index.php?id=$id&action=2' method='POST' class='w3-container w3-round w3-green'>
@@ -38,7 +43,7 @@ if ($edit == 1 and isset($_SESSION['username'])){
     </form>";
 /*else only post for view*/
 }else{
-$posts .= "<div class='w3-card w3-round w3-sand w3-padding-small w3-margin-bottom'><h3>$title</h3>
+$posts .= "<div class='w3-card w3-round w3-padding-small w3-margin-bottom $vis_color'><h3>$title</h3>
 <div>$description<br>
 <div class='w3-text-grey'>
 The article was posted by $by on $time<br>
