@@ -1,21 +1,21 @@
-<div class="w3-container w3-center w3-teal"><h3>Categories</div>
 <?php
+   if (realpath(__FILE__) == realpath($_SERVER['DOCUMENT_ROOT'].$_SERVER['SCRIPT_NAME'])) {
+    echo "File can't be called separately, it is part of other script";
+    }else{
+$cat .= "<div class='w3-container w3-round w3-center $card_color'><h3>Categories</div>";
 $sql = "SELECT * FROM category";
 $result = mysqli_query($dbcon, $sql);
 if (mysqli_num_rows($result) < 1) {
-    echo "<div class='w3-panel w3-pale-red'>Not Category found.</a>";
-}
-
-echo "<div class='w3-container w3-border'>";
+    $cat .= "<div class='w3-panel w3-pale-red'>No Category found.</a>";
+}else{
+$cat .= "<div class='w3-container w3-center w3-round'>";
 while ($row = mysqli_fetch_assoc($result)) {
     $id = $row['id'];
     $catname = $row['catname'];
     $description = $row['description'];
-    ?>
-
-    <div class="w3-panel w3-border"><a href="cat.php?id=<?php echo $id; ?>"><?php echo $catname; ?></a><br>
-        <?php echo $description; ?>
-    </div>
-    <?php
+    $cat .= "<div class='w3-panel w3-round w3-btn'><a href='cat.php?id=$id'>$catname</a><br>$description</div>";
 }
-echo "</div>";
+}
+$cat .= "</div>";
+}
+?>
