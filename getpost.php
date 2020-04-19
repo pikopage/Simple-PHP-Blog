@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])){
 }else{
     $visible = "and b.visible = 1";
 }
-$hsql = "SELECT id,title,description,posted_by, hits,DATE_FORMAT(date,'%D %M %Y') as date, visible FROM posts WHERE id = '$id' AND deleted = 0 $visible AND pinned = 0";
+$hsql = "SELECT id,title,description,posted_by, hits,DATE_FORMAT(date,'%D %M %Y') as date, visible FROM posts as b WHERE id = '$id' AND deleted = 0 $visible AND pinned = 0";
 $res = mysqli_query($dbcon, $hsql);
 $row = mysqli_fetch_assoc($res);
 $id = $row['id'];
